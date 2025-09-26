@@ -13,8 +13,8 @@
 <h2>High-Level Deployment and Configuration Steps(Part 1)</h2>
 <p> 
   
-  1. Set up resources in Azure: Create a Domain Controller and a Client VM.
-  2. Configure DNS IP Address
+  1. Setup resources in Azure: Create a Domain Controller and a Client VM.
+  2. Configure DNS IP Address: Join Client to Domain Controller 
   3. Ensure network connectivity between the Client and the Domain Controller.
   
 </p>
@@ -37,20 +37,53 @@
 
 <p>
 
-## Step 2: Create the Virtual Machines
-
-**Create two VMs (Azure) in the same VNET. One will be a Domain Controller, the other will be a Client machine**
-
-- Create a VM for the Domain Controller on Azure.
-- Name it DC-1
-- Select Windows Server 2022 Datacenter: Azure Edition -x64 Gen2 as the Image
-- Size (Standard_D2_v3 - 2 vcpus, 8 GiB memory)
-- Create a username and password for your VM DC-1
+<h2> Step 1: Setup resources in Azure </h2> 
 
 
-<img width="738" height="428" alt="Screenshot 2025-09-18 104915" src="https://github.com/user-attachments/assets/8f9134be-eaf9-4db2-80d6-7039f48289bc" />
+<p> 
+  
+  - Create a Resource group (RG)
+  - Create a Vitural Network (Vnet) and Subnet. link it to the Resource Group 
 
-**Create a VM for the client machine**
+</p>
+
+<p> 
+  
+<img width="751" height="362" alt="image" src="https://github.com/user-attachments/assets/f5f45207-20fb-4e24-bfc4-de18c37b75a3" />
+<img width="755" height="636" alt="image" src="https://github.com/user-attachments/assets/e9964ca9-10da-4cfb-8350-7a2176c90e05" />
+
+</p>
+
+<h2></h2>
+<br /> 
+
+<p> 
+  
+  - Create a VM for the Domain Controller. Name: DC-1
+  - Link it to the Vnet & Resource Group.
+  - Ensure to select the correct OS: Windows Server 2022 Datacenter
+  - Select CPU and Memory: 2CPUs minimum
+  - Set Username and Password
+
+</p>
+<br />
+<p> 
+<img width="757" height="357" alt="image" src="https://github.com/user-attachments/assets/dbd628f3-e6bb-450d-8f34-afea560b00e1" />
+<img width="766" height="147" alt="image" src="https://github.com/user-attachments/assets/d4bd7a1a-cb7f-4d04-bef5-a003dd644d7b" />
+
+</p>
+
+<p> 
+  In the Networking section of creating the VM, Ensure to link the Vnet created prior.
+</p>
+
+<p> 
+
+<img width="771" height="342" alt="Screenshot 2025-09-26 002920" src="https://github.com/user-attachments/assets/00432f4e-6ed4-4885-a883-18c2bcd6f366" />
+
+</p>
+
+
 
 - Create a new VM
 - Name it Client-1
