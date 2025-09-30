@@ -68,67 +68,104 @@
 </p>
 <br />
 <p> 
-<img width="757" height="357" alt="image" src="https://github.com/user-attachments/assets/dbd628f3-e6bb-450d-8f34-afea560b00e1" />
+<img width="757" height="357" alt="Screenshot 2025-09-26 002511" src="https://github.com/user-attachments/assets/ff97bb45-019f-4a95-b8d5-5cfe3fc4c4c0" />
+
 <img width="766" height="147" alt="image" src="https://github.com/user-attachments/assets/d4bd7a1a-cb7f-4d04-bef5-a003dd644d7b" />
 
 </p>
 
 <p> 
+  
   In the Networking section of creating the VM, Ensure to link the Vnet created prior.
+  
+  Next, "Review and Create".
+  
 </p>
 
 <p> 
 
 <img width="771" height="342" alt="Screenshot 2025-09-26 002920" src="https://github.com/user-attachments/assets/00432f4e-6ed4-4885-a883-18c2bcd6f366" />
 
+<h2></h2>
+
+<img width="645" height="392" alt="image" src="https://github.com/user-attachments/assets/e7bf4568-7450-4b3a-9a65-ea1c43f3115d" />
+
+</p>
+<p> 
+
+- Create a VM for the Client. Name: Client-1
+- Link it to the Vnet & Resource Group, Same as DC-1
+- Ensure to select the correct OS: Windows 10 Pro
+- Select CPU and Memory: 2CPUs minimum
+- Set Username and Password
+- Review & Create
+
 </p>
 
+<h2></h2>
+
+<p> 
+  
+<img width="1874" height="422" alt="image" src="https://github.com/user-attachments/assets/ba27f551-32dc-4d3f-8d91-35f4e84298e5" />
+
+When both VM's have been created your portal should look like this.
+
+</p>
+
+<p>
+<h2></h2>
 
 
-- Create a new VM
-- Name it Client-1
-- Slect Windows 10 Pro as the image
-- Select at least 2 vcpus and 16 GiB memory
-- Create a username and password for your VM Client-1
-- Make sure to select the same resource group and Virtual network from the DC-1 VM
+
+<h2> Step 2:Configure DNS IP Address: Join Client to Domain Controller </h2> 
+
+<P> 
+
+Both VM's have been given a Private & Public IP address, however we want the client to have access to the Domain Controller at all times. That means we need to ensure the Private IP Address of DC-1 cannot change regardless of how many new Vm's are created or how many times it is restarted.
+
+- Select DC-1
+- Networking > Network Settings
+- Select the Virtual NIC ( Network Interfacer Card)
+- Select IP Configurations
+- Select "ipconfig1" > Change allocation from Dynamic to Static & save.
+- ( You can Also configure the IP address you want the Domain Controller to have.)
+
+</P>
+<p> 
+  
+<img width="961" height="413" alt="image" src="https://github.com/user-attachments/assets/a63d3471-84fd-4bb7-93a1-33cbca772a54" />
+<img width="921" height="511" alt="image" src="https://github.com/user-attachments/assets/a0a394ec-1a55-4903-a40c-fcc7726c12df" />
+<img width="460" height="393" alt="image" src="https://github.com/user-attachments/assets/d5b21d1c-bcbc-45d5-b8f9-92d8e584ec15" />
+
+</p>
+
+<h2></h2>
+
+<p>
+  
+Next
+
+- Select the Client-1 VM
+- Networking > Network Settings
+- Select the Virtual NIC ( Network Interfacer Card)
+- Select  "DNS Servers"
+- Change "DNS servers" from "Inherit.." to "custom"
+- Enter the Private IP Address of the Domain Controller ( In this case 10.0.0.4) > Save
+
+Both DC-1 and Client-1 are now connected 
+Lets perform a test to confirm.
 
 
-<img width="767" height="443" alt="image" src="https://github.com/user-attachments/assets/3fc81412-8f1b-431b-930a-2f0b97801b4f" />
-
-
-
-
+</p>
 
 <p>
 
+<img width="950" height="431" alt="image" src="https://github.com/user-attachments/assets/53b9f474-529e-44b0-bda2-ed9e6d9066d5" />
+<img width="1074" height="334" alt="image" src="https://github.com/user-attachments/assets/ab111d01-2f0f-40d0-a598-c980e9900d6f" />
 
+</p>
 
-
-## Step 3: Set the Domain Controller's Private IP to static
-
-**We don't want the IP to change so that the client-1 machine can join the Domain**
-
-- Once the VM has been deployed, proceed to the VM overview page and select "Networking" > network settings on the left side.
-
-<img width="771" height="444" alt="Screenshot 2025-09-04 142451" src="https://github.com/user-attachments/assets/df88c968-13d6-4f79-a582-0f17864679da" />
-
-
-- Select Network Interface Card > IP configurations > ipconfig1 and set Private IP addess allocation to static.
-
-<img width="769" height="442" alt="Screenshot 2025-09-04 142507" src="https://github.com/user-attachments/assets/56ae10dd-ee06-402f-b428-52d20ff8dd85" />
-
-
-
-
-
-
-
-<p>
-
-
-
-## Step 4: Login to DC-1 and configure the firewall settings
-
+<h2> Step 3: Ensure network connectivity between the Client and the Domain Controller. </h2>
 **We're going to configure the firewall settings inside our Domain Controller virtual machine**
 
 - Right click the start menu and click Run
